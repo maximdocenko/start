@@ -12,12 +12,7 @@ class Home extends Component {
     places: []
   }
 
-  componentDidMount() {
-    this.doTask()
-  }
-  componentDidUpdate() {
-    this.doTask()
-  }
+  
 
   doTask = async () => {    
     let posts = await AsyncStorage.getItem('posts');
@@ -33,7 +28,7 @@ render() {
         
         <View style={styles.app}>
           <ScrollView>
-            {this.state.places.map((item) => {
+            {this.state.places ? this.state.places.map((item) => {
               return(
                 <ListItem 
                 title={ item.title }
@@ -43,7 +38,7 @@ render() {
                 date={ item.date }
               />
               )
-            })}
+            }) : null}
           </ScrollView>
         </View>
         
