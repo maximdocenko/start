@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#F5F5F5'
   },
+  app: {
+    height: Dimensions.get('window').height - 150,
+  },
   inputContainer: {
     width: '100%',
     backgroundColor: '#fff',
