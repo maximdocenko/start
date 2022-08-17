@@ -12,7 +12,13 @@ class Home extends Component {
     places: []
   }
 
-  
+  componentDidMount() {
+    this.doTask()
+  }
+
+  componentDidUpdate() {
+    this.doTask()
+  }
 
   doTask = async () => {    
     let posts = await AsyncStorage.getItem('posts');
@@ -20,28 +26,33 @@ class Home extends Component {
       places: JSON.parse(posts)
     })
   }
+
+
+  output = () => {
+    return ( 
+     <FlatList style = { styles.postContainer }
+       data = {this.state.places}
+       keyExtractor={(item, index) => index.toString()}
+       renderItem = { info => (
+         <ListItem 
+           title={ info.item.title }
+           status={ info.item.status }
+           description={ info.item.description }
+           image={ info.item.image }
+           date={ info.item.date }
+         />
+       )}
+     />
+   )
+ }
  
 render() {
   return (
     <View style={ styles.container }>
         <StatusBar hidden />
-        
         <View style={styles.app}>
-          <ScrollView>
-            {this.state.places ? this.state.places.map((item) => {
-              return(
-                <ListItem 
-                title={ item.title }
-                status={ item.status }
-                description={ item.description }
-                image={ item.image }
-                date={ item.date }
-              />
-              )
-            }) : null}
-          </ScrollView>
+          {this.output()}
         </View>
-        
         <View style={styles.footer}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('AddPost')} style={styles.button}>
                 <Text style={styles.buttonText}>New Post</Text>
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5'
   },
   app: {
-    height: Dimensions.get('window').height - 205,
+    height: Dimensions.get('window').height - 150,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -108,8 +119,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     paddingHorizontal: 16,
-    paddingTop: 25,
-    paddingBottom: 80,
+    paddingVertical: 25,
   }
 });
 

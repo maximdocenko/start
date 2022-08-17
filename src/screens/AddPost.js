@@ -22,16 +22,20 @@ class AddPost extends React.Component {
 
     doTask = async (obj) => { 
       posts =  await AsyncStorage.getItem('posts');
-      var array = [...[obj], ...JSON.parse(posts)]
+      if(posts == null) {
+        var array = [obj]
+      }else{
+        var array = [...[obj], ...JSON.parse(posts)]
+      }
       //console.log(array)
       await AsyncStorage.setItem('posts', JSON.stringify(array));
-      this.props.navigation.navigate('Home')
+      this.props.navigation.navigate('Home', {post: obj})
     }
 
   submit = () => {
 
     obj = {
-      title: this.state.title,
+      title: this.state.title, 
       status: this.state.status,
       description: this.state.description,
       image: this.state.image,
@@ -53,39 +57,40 @@ clean() {
     });
 }
 
-pick() {
-    ImagePicker.openPicker({
-        multiple: false,
-        waitAnimationEnd: false,
-        includeExif: true,
-        forceJpg: true,
-    }).then(image => {
-        this.setState({
-            image: {uri: image.path, width: image.width, height: image.height, mime: image.mime},
-            errorImage: 0
-        });
-    }).catch(e => alert(e));
-}
+  pick() {
+      ImagePicker.openPicker({
+          multiple: false,
+          waitAnimationEnd: false,
+          includeExif: true,
+          forceJpg: true,
+      }).then(image => {
+          this.setState({
+              image: {uri: image.path, width: image.width, height: image.height, mime: image.mime},
+              errorImage: 0
+          });
+      }).catch(e => alert(e));
+  }
 
-    renderImage(image) {    
-        return <View>
-            <TouchableOpacity style={styles.delete} onPress={this.clean.bind(this)}>
-              <Image
-                style={{ width: 20, height: 20 }}
-                source={require('../../assets/img/delete.png')}
-              />
-            </TouchableOpacity>
-            <Image style={{width: 80, height: 80, resizeMode: 'cover'}} source={{uri: image.uri}}/>
-          </View>
-    }
+  renderImage(image) {    
+    return <View>
+        <TouchableOpacity style={styles.delete} onPress={this.clean.bind(this)}>
+          <Image
+            style={{ width: 20, height: 20 }}
+            source={require('../../assets/img/delete.png')}
+          />
+        </TouchableOpacity>
+        <Image style={{width: 80, height: 80, resizeMode: 'cover'}} source={{uri: image.uri}}/>
+      </View>
+  }
 
 render() {
     
   return (
     <View style={ styles.container}>
        <StatusBar hidden />
-        
+        <ScrollView>
         <View style={styles.app}>
+                <Text>{this.state.valid}</Text>
                 <View style = { styles.inputContainer}>
                     <TextInput
                     placeholder="Title"
@@ -121,10 +126,9 @@ render() {
                 <View style = { styles.inputContainer}>
                     <Text style={styles.label}>Photo</Text>
                     <TouchableOpacity onPress={this.pick.bind(this)}>
-                            
                         <View style={styles.imagePircker}>
                             {this.state.image ? this.renderImage(this.state.image) : <Image
-                                style={{ width: 32, height: 32, borderRadius: 12 }}
+                                style={{ width: 32, height: 32 }}
                                 source={require('../../assets/img/icon.png')}
                             />}
                         </View>
@@ -139,7 +143,7 @@ render() {
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>        
-       
+        </ScrollView>
       </View>
     );
   }
@@ -149,9 +153,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
     backgroundColor: '#F5F5F5'
-  },
-  app: {
-    height: Dimensions.get('window').height - 205,
   },
   inputContainer: {
     width: '100%',
@@ -305,7 +306,7 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     fontSize: 12,
-    marginBottom: 6
+    marginBottom: 7
   },
   delete: {
     zIndex: 3,
