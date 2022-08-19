@@ -1,18 +1,15 @@
-// placeReducer.js
-
-import { ADD_PLACE } from '../actions/types';
+import { ADD_POST } from '../actions/types';
 
 const initialState = {
-  placeName: '',
-  places: []
+  posts: []
 };
 
-const placeReducer = (state = initialState, action) => {
+const postReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ADD_PLACE:
+    case ADD_POST:
       return {
         ...state,
-        places: state.places.concat({
+        posts: state.posts.concat({
           key: Math.random(),
           title: action.payload.title,
           status: action.payload.status,
@@ -26,4 +23,4 @@ const placeReducer = (state = initialState, action) => {
   }
 }
 
-export default placeReducer;
+export default postReducer;

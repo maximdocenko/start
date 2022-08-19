@@ -1,10 +1,10 @@
 // store.js
 
 import { createStore, combineReducers } from 'redux';
-import placeReducer from './src/reducers/placeReducer';
+import postReducer from './src/reducers/postReducer';
 
 const rootReducer = combineReducers({
-  places: placeReducer
+  posts: postReducer
 });
 
 const configureStore = () => {

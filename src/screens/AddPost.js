@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, View, Text, Image, Dimensions, TextInput, NativeModules, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
-import { addPlace } from '../actions/place';
+import { addPost } from '../actions/post';
 import {Picker} from '@react-native-picker/picker';
 import Moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -325,14 +325,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    places: state.places.places
+    posts: state.posts.posts
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     add: (name) => {
-      dispatch(addPlace(name))
+      dispatch(addPost(name))
     }
   }
 }
