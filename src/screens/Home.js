@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, View, Text, Image, Dimensions, TextInput, Button, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import ListItem from '../components/ListItem';
+import Footer from '../components/Footer';
 import { connect } from 'react-redux';
 import { addPost } from '../actions/post';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { css } from '../assets/css/styles';
 
 class Home extends Component {
 
@@ -30,7 +32,7 @@ class Home extends Component {
 
   output = () => {
     return ( 
-     <FlatList style = { styles.postContainer }
+     <FlatList style = { css.postContainer }
        data = {this.state.posts}
        keyExtractor={(item, index) => index.toString()}
        renderItem = { info => (
@@ -50,16 +52,10 @@ render() {
   return (
     <View style={ styles.container }>
         <StatusBar hidden />
-        <View style={styles.app}>
+        <View style={css.app}>
           {this.output()}
         </View>
-        <View style={styles.footer}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('AddPost')} style={styles.button}>
-                <Text style={styles.buttonText}>New Post</Text>
-            </TouchableOpacity>
-        </View>
-       
-       
+        <Footer navigation={this.props.navigation}/>
       </View>
     );
   }
@@ -70,57 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5'
   },
-  app: {
-    height: Dimensions.get('window').height - 150,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%'
-  },
-  placeInput: {
-    width: '70%'
-  },
-  placeButton: {
-    width: '30%'
-  },
-  postContainer: {
-    width: '100%'
-  },
-  content: {
-    width: Dimensions.get('window').width - 176
-  },
-  text: {
-    fontFamily: 'Lato-Regular',
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: 14,
-    lineHeight: 20,
-    color: '#151C26'
-  },
-  bottom: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  button: {
-    padding: 12,
-    backgroundColor: '#0071D8',
-    borderRadius: 8,
-  },
-  buttonText: {
-    fontFamily: 'Lato-Bold',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: 16,
-    lineHeight: 20,
-    textAlign: 'center',
-    color: '#FFFFFF'
-  },
-  footer: {
-    paddingHorizontal: 16,
-    paddingVertical: 25,
-  }
 });
 
 const mapStateToProps = state => {
