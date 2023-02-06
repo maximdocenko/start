@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import AddPost from './src/screens/AddPost';
-import { css } from '../assets/css/styles';
+import { css } from './src/assets/css/styles';
 
 const Stack = createNativeStackNavigator();
 
