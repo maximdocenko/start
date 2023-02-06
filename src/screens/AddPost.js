@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, TouchableOpacity, View, Text, Image, Dimensions, TextInput, NativeModules, StatusBar } from 'react-native';
+import { ScrollView, TouchableOpacity, View, Text, Image, TextInput, NativeModules, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { addPost } from '../actions/post';
 import {Picker} from '@react-native-picker/picker';

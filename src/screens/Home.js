@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, Image, Dimensions, TextInput, Button, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { StyleSheet, View, FlatList, StatusBar } from 'react-native';
 import ListItem from '../components/ListItem';
 import Footer from '../components/Footer';
 import { connect } from 'react-redux';

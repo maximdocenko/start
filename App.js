@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import AddPost from './src/screens/AddPost';
+import { css } from '../assets/css/styles';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,7 @@ function Logo() {
 
 function Title(props) {
   return (
-      <View><Text style={styles.title}>{props.title}</Text></View>
+      <View><Text style={css.title}>{props.title}</Text></View>
   );
 }
 
@@ -32,17 +33,5 @@ function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontFamily: 'Lato-Medium',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 18,
-    lineHeight: 24,
-    textAlign: 'center',
-    color: '#151C26',
-  }
-})
 
 export default App;
