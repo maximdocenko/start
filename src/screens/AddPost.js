@@ -77,7 +77,7 @@ clean() {
         <TouchableOpacity style={css.delete} onPress={this.clean.bind(this)}>
           <Image
             style={{ width: 20, height: 20 }}
-            source={require('../../assets/img/delete.png')}
+            source={require('../assets/img/delete.png')}
           />
         </TouchableOpacity>
         <Image style={{width: 80, height: 80, resizeMode: 'cover'}} source={{uri: image.uri}}/>
@@ -130,7 +130,7 @@ render() {
                         <View style={css.imagePircker}>
                             {this.state.image ? this.renderImage(this.state.image) : <Image
                                 style={{ width: 32, height: 32 }}
-                                source={require('../../assets/img/icon.png')}
+                                source={require('../assets/img/icon.png')}
                             />}
                         </View>
                     </TouchableOpacity>

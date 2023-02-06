@@ -11,7 +11,7 @@ function Logo() {
   return (
       <Image
         style={{ width: 24, height: 24 }}
-        source={require('./assets/img/Logo.png')}
+        source={require('./src/assets/img/Logo.png')}
       />
   );
 }
